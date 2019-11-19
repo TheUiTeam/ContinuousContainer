@@ -1,0 +1,92 @@
+---
+name: ContinuousContainer
+route: /ContinuousContainer
+---
+
+import { useState } from 'react';
+import { Playground, Props } from 'docz'
+
+import { ContinuousContainer } from './ContinuousContainer';
+
+# Continuous Container
+
+Renderless container with a _Continuous_ State
+
+<Props of={ContinuousContainer} />
+
+
+
+# Common case - YES or NO
+
+Let's imagine you have a switch. Which controls visibility of something, but you 
+also want to add some animation.
+
+Let's handle these cases separately: 
+
+<Playground>
+ {() => {
+   const [on, setOn] = useState(false);
+   
+   return (
+     <div>
+       <button onClick={() => setOn(on => !on)}>Toggle</button>
+       
+       <p>
+        the following content would be __instanly__ hidden or shown
+       { on && <div>shown</div>}
+       { !on && <div>hidden</div>}
+       </p>               
+     </div>
+   )
+ }}
+</Playground>
+
+
+<br/>
+<br/>
+
+# Improved case - YES/NO/WAS JUST A SECOND AGO
+
+Now let's imagine you dont want to render Content when it's not visible.
+
+Ok, "when it's not visible"? - _AnimationTimeout_ after being hidden
+
+<Playground>
+{() => {
+  const [on, setOn] = useState(false);
+  
+  return (
+    <div>
+      <button onClick={() => setOn(on => !on)}>Toggle</button>
+      
+      <p>
+         the following content would be __instanly__ shown, but hidden in a timeout
+      <ContinuousContainer value={on} timeout={3000}>       
+       {(past, present, future) => (
+       <>         
+         <ul>
+           <li>past - {String(past)} - going to be delayed by 3s</li>
+           <li>present - {String(present)}</li>
+           <li>future - {String(future)}</li>
+         </ul>
+         
+         {
+            // display if it
+            // - was displayed <300ms ago
+            // - is displayed
+            // - would be displayed next tick
+             
+            (past || present || future) 
+            ? <div> { present ? 'is shown now' : 'still have to show' }</div>
+            : <div>hidden</div>
+         }         
+       </>  
+       )}
+       </ContinuousContainer>
+       </p>
+    </div>
+  )
+}}
+</Playground>
+
+You dont have to use `future` in all the cases. You will figure out the right cases by your own

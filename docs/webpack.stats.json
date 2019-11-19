@@ -1,0 +1,68 @@
+{
+  "errors": [],
+  "warnings": [],
+  "namedChunkGroups": {
+    "app": {
+      "chunks": [6, 5, 0, 1],
+      "assets": [
+        "webpack-runtime-50b282eb119b33a47755.js",
+        "webpack-runtime-50b282eb119b33a47755.js.map",
+        "styles.2543ff947a193d7f33b1.css",
+        "styles-5b77f90fe5cf325487eb.js",
+        "styles-5b77f90fe5cf325487eb.js.map",
+        "commons-0a704c2d0a68518847b8.js",
+        "commons-0a704c2d0a68518847b8.js.map",
+        "app-d5399b2d39d517af51ca.js",
+        "app-d5399b2d39d517af51ca.js.map"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "component---readme-md": {
+      "chunks": [0, 2],
+      "assets": [
+        "commons-0a704c2d0a68518847b8.js",
+        "commons-0a704c2d0a68518847b8.js.map",
+        "component---readme-md-056fa342a1c58032d70b.js",
+        "component---readme-md-056fa342a1c58032d70b.js.map"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "component---src-continuous-container-mdx": {
+      "chunks": [0, 3],
+      "assets": [
+        "commons-0a704c2d0a68518847b8.js",
+        "commons-0a704c2d0a68518847b8.js.map",
+        "component---src-continuous-container-mdx-ac8979f7a2f65d254853.js",
+        "component---src-continuous-container-mdx-ac8979f7a2f65d254853.js.map"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "component---src-pages-404-js": {
+      "chunks": [4],
+      "assets": [
+        "component---src-pages-404-js-c8b8a2b46e66290f12bd.js",
+        "component---src-pages-404-js-c8b8a2b46e66290f12bd.js.map"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "assetsByChunkName": {
+    "app": [
+      "webpack-runtime-50b282eb119b33a47755.js",
+      "styles.2543ff947a193d7f33b1.css",
+      "styles-5b77f90fe5cf325487eb.js",
+      "commons-0a704c2d0a68518847b8.js",
+      "app-d5399b2d39d517af51ca.js"
+    ],
+    "component---readme-md": ["commons-0a704c2d0a68518847b8.js", "component---readme-md-056fa342a1c58032d70b.js"],
+    "component---src-continuous-container-mdx": [
+      "commons-0a704c2d0a68518847b8.js",
+      "component---src-continuous-container-mdx-ac8979f7a2f65d254853.js"
+    ],
+    "component---src-pages-404-js": ["component---src-pages-404-js-c8b8a2b46e66290f12bd.js"]
+  }
+}

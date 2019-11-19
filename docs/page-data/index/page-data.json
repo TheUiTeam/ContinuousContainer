@@ -1,0 +1,25 @@
+{
+  "componentChunkName": "component---readme-md",
+  "path": "/",
+  "result": {
+    "pageContext": {
+      "isCreatedByStatefulCreatePages": false,
+      "frontmatter": {},
+      "entry": {
+        "id": "04c6e90faac2675aa89e2176d2eec7d8",
+        "filepath": "README.md",
+        "fullpath": "/Users/akorzunov/dev/Z/uiteam/lazyContainer/README.md",
+        "route": "/",
+        "slug": "readme",
+        "name": "Readme",
+        "menu": "",
+        "headings": [
+          { "slug": "idea", "depth": 2, "value": "Idea" },
+          { "slug": "usage", "depth": 2, "value": "Usage" },
+          { "slug": "additional-api", "depth": 3, "value": "Additional API" },
+          { "slug": "license", "depth": 1, "value": "License" }
+        ]
+      }
+    }
+  }
+}
