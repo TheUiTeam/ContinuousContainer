@@ -86,6 +86,10 @@ Of course a `hook`
 const [past, present, future] = useContinuousState(value, timeout);
 ```
 
+# See also
+
+- [Phased](https://github.com/theKashey/recondition#phased) Container from a `recondition` library
+
 # License
 
 MIT
