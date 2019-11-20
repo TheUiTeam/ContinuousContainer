@@ -54,7 +54,7 @@ Now let's imagine you dont want to render Content when it's not visible.
 Ok, "when it's not visible"? - AnimationTimeout after being hidden
 
 ```typescript jsx
-import {ContinuousContainer} from '@theuiteam/ContinuousContainer';
+import {ContinuousContainer} from '@theuiteam/continuous-container';
 
 const App = () => {
   const [on, setOn] = useState(false);
@@ -83,6 +83,7 @@ const App = () => {
 Of course a `hook`
 
 ```js
+import { useContinuousState } from '@theuiteam/continuous-container';
 const [past, present, future] = useContinuousState(value, timeout);
 ```
 

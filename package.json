@@ -1,5 +1,5 @@
 {
-  "name": "@theuiteam/ContinuousContainer",
+  "name": "@theuiteam/continuous-container",
   "version": "1.0.0",
   "description": "State container with the known past, present, and the future",
   "main": "dist/es5/index.js",
