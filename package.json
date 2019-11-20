@@ -26,7 +26,8 @@
     "format": "lib-builder format",
     "update": "lib-builder update",
     "docz:dev": "docz dev",
-    "docz:build": "docz build"
+    "docz:build": "docz build",
+    "prepublish": "yarn build"
   },
   "peerDependencies": {
     "react": "^16.9.0"
