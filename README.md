@@ -5,8 +5,8 @@
   Something with known past, present, and the future 
   <br/>
   <br/>
-    <a href="https://www.npmjs.com/package/@theuiteam/ContinuousContainer">
-      <img src="https://img.shields.io/npm/v/@theuiteam/@theuiteam/ContinuousContainer.svg?style=flat-square" />
+    <a href="https://www.npmjs.com/package/@theuiteam/continuous-container">
+      <img src="https://img.shields.io/npm/v/@theuiteam/continuous-container.svg?style=flat-square" />
     </a>
 
 </div>
