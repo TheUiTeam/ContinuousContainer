@@ -23,6 +23,9 @@ animation.
 We are doing the same, but using state.
 
 It's all about tracking what the value `would be`, what is `right now`, and what it `was`.
+We call this ContinuousState
+
+### ContinuousState
 
 - `future` - the next value. The value you just set.
 - `present` - to be synchronized with the `future` "later"
@@ -30,15 +33,21 @@ It's all about tracking what the value `would be`, what is `right now`, and what
 
 and
 
-- `defined` - an indication that any of future, past or preset are truthy.
+- `defined` - an indication that any of future, past or present are truthy.
 
 # API
 
-## useContinuousState
+## useContinuousState(value, options)
 
-```tsx
-const co
-```
+- `value` - a value to assign to the `future`
+- `options`
+  - `delayPresent` - time in ms between `future` becoming `present`
+  - `delayPast` - time in ms between `present` becoming `past`. For transitions, it usually equals to exist animation duration
+  - `initialValue` - a value to be set as initial to the `past` and `present`. `future` is always equal to the `value` given as a first arg
+
+## useScatteredContinuousState(value, options)
+
+Call signature is equal to `useContinuousState`, returns an object with extra property `DefinePresent`. See example below.
 
 ## Usage
 
@@ -64,7 +73,7 @@ const App = () => {
 };
 ```
 
-Now let's imagine you want to __not render Content__ _when_ it's not visible and not required.
+Now let's imagine you want to **not render Content** _when_ it's not visible and not required.
 
 Ok, "when is this _when_"?
 
@@ -73,46 +82,43 @@ Ok, "when is this _when_"?
 - render `ContentWithAnimation` when it is no longer visible, but still animating toward hidden state
 
 ```typescript jsx
-import {ContinuousContainer, useContinuousState} from '@theuiteam/continuous-container';
+import { ContinuousContainer, useContinuousState } from '@theuiteam/continuous-container';
 
 const App = () => {
-    const [on, setOn] = useState(false);
-    const continuousState = useContinuousState(on);
+  const [on, setOn] = useState(false);
+  const continuousState = useContinuousState(on);
 
-    return (
-        <div>
-            <button onClick={() => setOn(on => !on)}>Toggle</button>
-            {/*render if any of past/preset/future is set to true*/}
-            {continuousState.defined && (
-                <ContentWithAnimation visible={continuousState.present}/>
-                // wire the "present" state
-            )}
-            {/* or */}
-            <ContinuousContainer value={on} timeout={300}>
-                {(past, present, future) =>
-                    (past || present || future) &&
-                    <ContentWithAnimation visible={present}/>
-                    // ^^ use the "present" value
-                }
-            </ContinuousContainer>
-        </div>
-    )
-}
+  return (
+    <div>
+      <button onClick={() => setOn((on) => !on)}>Toggle</button>
+      {/*render if any of past/preset/future is set to true*/}
+      {continuousState.defined && (
+        <ContentWithAnimation visible={continuousState.present} />
+        // wire the "present" state
+      )}
+      {/* or */}
+      <ContinuousContainer value={on} timeout={300}>
+        {
+          (past, present, future) => (past || present || future) && <ContentWithAnimation visible={present} />
+          // ^^ use the "present" value
+        }
+      </ContinuousContainer>
+    </div>
+  );
+};
 ```
 
 ## Scattered
 
-There are more sophisticated situations, when __setting up__ something to display does not mean "display". Lazy loading
+There are more sophisticated situations, when **setting up** something to display does not mean "display". Lazy loading
 is a good case
 
 ```tsx
 const App = () => {
-    const continuousState = useContinuousState(on);
-    return continuousState.defined && (
-        <LazyLoadedContentWithAnimation visible={continuousState.present}/>
-    )
-}
-```            
+  const continuousState = useContinuousState(on);
+  return continuousState.defined && <LazyLoadedContentWithAnimation visible={continuousState.present} />;
+};
+```
 
 In such case ContinuousState will update from `future` to `present` before `LazyLoadedContentWithAnimation` component is
 loaded, breaking a connection between states.
@@ -120,21 +126,36 @@ loaded, breaking a connection between states.
 In order to handle this problem one might need to _tap_ into rendering process using `useScatteredContinuousState`
 
 ```tsx
-    const continuousState = useScatteredContinuousState(on);
-return continuousState.defined && (
+const continuousState = useScatteredContinuousState(on);
+return (
+  continuousState.defined && (
     <Suspense>
-        <LazyLoadedContentWithAnimation visible={continuousState.present}>
-            <continuousState.DefinePresent/>
-            {/*this component will advance ContinuousState once rendered*/}
-        </LazyLoadedContentWithAnimation>
+      <LazyLoadedContentWithAnimation visible={continuousState.present}>
+        <continuousState.DefinePresent />
+        {/*this component will advance ContinuousState once rendered*/}
+      </LazyLoadedContentWithAnimation>
     </Suspense>
-)
+  )
+);
 ```
 
 For readability purposes we recommend putting DefinePresent to a separate slot different from `children`.
 
 ```tsx
-<LazyLoadedContentWithAnimation visible={continuousState.present} effector={<continuousState.DefinePresent/>}/>
+<LazyLoadedContentWithAnimation visible={continuousState.present} effector={<continuousState.DefinePresent />} />
+```
+
+###### ⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
+The following code will NOT work as `DefinePresent` will be rendered instantly, even if suspense will be in fallback
+
+```tsx
+<Suspense>
+  // will not be rendred until ready
+  <LazyLoadedContentWithAnimation visible={continuousState.present} />
+  // will be rendered too early
+  <continuousState.DefinePresent />
+</Suspense>
 ```
 
 # See also
