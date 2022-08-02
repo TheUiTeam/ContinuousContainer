@@ -1,6 +1,6 @@
 {
   "name": "@theuiteam/continuous-container",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "State container with the known past, present, and the future",
   "main": "dist/es5/index.js",
   "author": "Anton Korzunov <thekashey@gmail.com>",
