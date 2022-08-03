@@ -6,9 +6,22 @@
   <br/>
   a `useState` aware of continuous nature of time
   <br/>
-    <a href="https://www.npmjs.com/package/@theuiteam/continuous-container">
-      <img src="https://img.shields.io/npm/v/@theuiteam/continuous-container.svg?style=flat-square" />
-    </a>
+
+<p align="center">
+  <a href="https://bundlephobia.com/result?p=@theuiteam/continuous-container">
+    <img alt="Bundlephobia" src="https://img.shields.io/bundlephobia/minzip/@theuiteam/continuous-container?style=for-the-badge&labelColor=24292e">
+  </a>
+  <a aria-label="Types" href="https://www.npmjs.com/package/@theuiteam/continuous-container">
+    <img alt="Types" src="https://img.shields.io/npm/types/@theuiteam/continuous-container?style=for-the-badge&labelColor=24292e">
+  </a>
+  <a aria-label="License" href="https://jaredlunde.mit-license.org/">
+    <img alt="MIT License" src="https://img.shields.io/npm/l/@theuiteam/continuous-container?style=for-the-badge&labelColor=24292e">
+  </a>
+</p>
+
+<pre align="center">npm i @theuiteam/continuous-container</pre>
+<hr>
+
 
 </div>
 
@@ -99,7 +112,7 @@ const App = () => {
       {/* or */}
       <ContinuousContainer value={on} timeout={300}>
         {
-          (past, present, future) => (past || present || future) && <ContentWithAnimation visible={present} />
+          ({past, present, future}) => (past || present || future) && <ContentWithAnimation visible={present} />
           // ^^ use the "present" value
         }
       </ContinuousContainer>
